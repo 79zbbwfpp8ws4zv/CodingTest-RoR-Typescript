@@ -28,11 +28,11 @@ const TodoList: React.FC<Props> = ({ todoItems }) => {
     axios.post("/todo", {
       id: todoItemId,
       checked: e.target.checked,
-    });
+    }).then(() => location.reload());
   };
 
   const resetButtonOnClick = (): void => {
-    axios.post("/reset").then(() => location.reload());
+    axios.post("/reset", this.id).then(() => location.reload());
   };
 
   return (
