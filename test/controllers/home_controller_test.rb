@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class UpdateFlowTest < ActionDispatch::IntegrationTest
+class HomeControllerTest < ActionDispatch::IntegrationTest
   teardown do
     Todo.destroy_all
   end
