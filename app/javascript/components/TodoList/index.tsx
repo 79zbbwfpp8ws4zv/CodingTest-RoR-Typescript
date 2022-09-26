@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { Container, ListGroup, Form } from "react-bootstrap";
-import { ResetButton } from "./uiComponent";
+import { ResetButton, RemoveButton, FlexContainer } from "./uiComponent";
 import axios from "axios";
 
 type TodoItem = {
@@ -31,6 +31,14 @@ const TodoList: React.FC<Props> = ({ todoItems }) => {
     }).then(() => location.reload());
   };
 
+  const removeOnClick = (
+    e: React.ClickEvent<HTMLInputElement>,
+    todoItemId: number
+  ): void => {
+    axios.delete("/todo/" + todoItemId
+    ).then(() => location.reload());
+  };
+
   const resetButtonOnClick = (): void => {
     axios.post("/reset").then(() => location.reload());
   };
@@ -41,12 +49,15 @@ const TodoList: React.FC<Props> = ({ todoItems }) => {
       <ListGroup>
         {todoItems.map((todo) => (
           <ListGroup.Item key={todo.id}>
-            <Form.Check
-              type="checkbox"
-              label={todo.title}
-              checked={todo.checked}
-              onChange={(e) => checkBoxOnCheck(e, todo.id)}
-            />
+            <FlexContainer>
+              <Form.Check
+                type="checkbox"
+                label={todo.title}
+                checked={todo.checked}
+                onChange={(e) => checkBoxOnCheck(e, todo.id)}
+              />
+              <RemoveButton onClick={(e) => removeOnClick(e, todo.id)}>Remove</RemoveButton>
+            </FlexContainer>
           </ListGroup.Item>
         ))}
         <ResetButton onClick={resetButtonOnClick}>Reset</ResetButton>

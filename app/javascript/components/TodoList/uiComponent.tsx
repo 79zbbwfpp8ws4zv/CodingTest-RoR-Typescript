@@ -5,3 +5,12 @@ import styled from "styled-components";
 export const ResetButton = styled(Button)`
   margin-top: 1em;
 `;
+
+export const RemoveButton = Button;
+
+export const FlexContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+`;

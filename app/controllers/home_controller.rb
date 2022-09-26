@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class HomeController < ApplicationController
-  before_action :set_todo_item, only: [:edit_todo_item]
+  before_action :set_todo_item, only: [:edit_todo_item, :delete_todo_item]
 
   def landing
     @todos = Todo.all.order(:id)
@@ -13,6 +13,10 @@ class HomeController < ApplicationController
 
   def reset_todo_items
     Todo.update_all(checked: false)
+  end
+
+  def delete_todo_item
+    @todo_item.destroy
   end
 
   private
